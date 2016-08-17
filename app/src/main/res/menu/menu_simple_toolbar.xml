@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@id/id_menu_sub"
+        android:icon="@mipmap/ic_launcher"
+        android:orderInCategory="0"
+        android:title="同级按钮"
+        android:visible="false"
+        app:showAsAction="always" />
+    <item
+        android:id="@id/id_menu_more"
+        android:icon="@mipmap/ic_launcher"
+        android:orderInCategory="1"
+        android:title="更多"
+        android:visible="true"
+        app:showAsAction="always|collapseActionView" />
+
+</menu>

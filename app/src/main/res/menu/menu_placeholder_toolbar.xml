@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/menu_normal"
+        android:orderInCategory="1"
+        android:title="消失"
+        android:visible="true"
+        app:showAsAction="always|collapseActionView" />
+
+    <item
+        android:id="@+id/menu_error"
+        android:orderInCategory="1"
+        android:title="错误"
+        android:visible="true"
+        app:showAsAction="always|collapseActionView" />
+
+    <item
+        android:id="@+id/menu_nonet"
+        android:orderInCategory="1"
+        android:title="无网络"
+        android:visible="true"
+        app:showAsAction="always|collapseActionView" />
+
+    <item
+        android:id="@+id/menu_empty"
+        android:orderInCategory="1"
+        android:title="无数据"
+        android:visible="true"
+        app:showAsAction="always|collapseActionView" />
+
+    <item
+        android:id="@+id/menu_loading"
+        android:orderInCategory="1"
+        android:title="加载中"
+        android:visible="true"
+        app:showAsAction="always|collapseActionView" />
+
+</menu>
