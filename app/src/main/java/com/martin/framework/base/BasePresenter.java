@@ -7,6 +7,7 @@ package com.martin.framework.base;
  */
 public interface BasePresenter {
 
-    void  start();
+    void onAttached();
 
+    void onDetached();
 }

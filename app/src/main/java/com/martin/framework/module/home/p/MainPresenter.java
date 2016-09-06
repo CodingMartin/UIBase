@@ -10,12 +10,16 @@ import com.martin.framework.module.home.c.MainContract;
 public class MainPresenter implements MainContract.Presenter {
 
     public MainPresenter(MainContract.View view) {
-        view.setPresenter(this);
+
     }
 
 
     @Override
-    public void start() {
+    public void onAttached() {
+
+    }
+
+    @Override public void onDetached() {
 
     }
 }

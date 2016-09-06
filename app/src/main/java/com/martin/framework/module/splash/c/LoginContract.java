@@ -1,7 +1,9 @@
 package com.martin.framework.module.splash.c;
 
+import com.martin.framework.base.BaseDataProvider;
 import com.martin.framework.base.BasePresenter;
 import com.martin.framework.base.BaseView;
+import com.martin.framework.module.splash.m.LoginDataProvider;
 
 /**
  * Desc:
@@ -11,7 +13,17 @@ import com.martin.framework.base.BaseView;
 public interface LoginContract {
 
 
-    interface View extends BaseView<Presenter>{}
+    interface View extends BaseView {
+        String getAccount();
+        String getPassword();
+        void actionHomePage();
+    }
 
-    interface Presenter extends BasePresenter{}
+    interface Presenter extends BasePresenter {
+        void onLogin();
+    }
+
+    interface DataProvider extends BaseDataProvider {
+        void doLogin(String account, String password, LoginDataProvider.LoginCallback loginCallback);
+    }
 }

@@ -15,7 +15,6 @@ public class PlaceholderActivity extends BaseCompatActivity {
 
     @Override
     protected void bindData() {
-
     }
 
     @Override
@@ -24,7 +23,7 @@ public class PlaceholderActivity extends BaseCompatActivity {
     }
 
     @Override
-    protected void initView() {
+    protected void bindView() {
     }
 
     @Override

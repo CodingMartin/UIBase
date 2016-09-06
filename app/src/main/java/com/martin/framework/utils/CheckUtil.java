@@ -49,7 +49,7 @@ public class CheckUtil {
     static String format(String template, @Nullable Object... args) {
         template = String.valueOf(template); // null -> "null"
 
-        // start substituting the arguments into the '%s' placeholders
+        // onAttached substituting the arguments into the '%s' placeholders
         StringBuilder builder = new StringBuilder(template.length() + 16 * args.length);
         int templateStart = 0;
         int i = 0;

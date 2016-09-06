@@ -125,14 +125,14 @@ public class PlaceholderPopWindow extends PopupWindow implements PopupWindow.OnD
     public void dismiss() {
         super.dismiss();
         if (mPlaceholderView != null) {
-            mPlaceholderView.dismss();
+            mPlaceholderView.dismiss();
         }
     }
 
     @Override
     public void onDismiss() {
         if (mPlaceholderView != null) {
-            mPlaceholderView.dismss();
+            mPlaceholderView.dismiss();
         }
     }
 

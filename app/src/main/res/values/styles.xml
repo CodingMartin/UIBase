@@ -5,9 +5,14 @@
         <!-- Customize your theme here. -->
     </style>
 
-    <style name="OverflowMenuStyle" parent="@style/ThemeOverlay.AppCompat.Light">
+    <style name="OverflowMenuStyle" parent="Widget.AppCompat.Light.PopupMenu.Overflow">
         <!-- 是否覆盖overflow按钮，默认为true，即盖住Toolbar -->
         <item name="overlapAnchor">false</item>
+        <item name="android:dropDownSelector">?attr/listChoiceBackgroundIndicator</item>
+        <item name="android:popupBackground">@drawable/abc_popup_background_mtrl_mult</item>
+        <item name="android:dropDownVerticalOffset">0dip</item>
+        <item name="android:dropDownHorizontalOffset">0dip</item>
+        <item name="android:dropDownWidth">wrap_content</item>
     </style>
 
     <style name="DropDownMenuAnimationStyle">
@@ -15,14 +20,16 @@
         <item name="android:windowExitAnimation">@anim/slide_out_to_top</item>
     </style>
 
-    <style name="ToolBarStyle">
-        <item name="android:textColorPrimary">#fff</item>
-        <item name="colorControlHighlight">#fff</item>
+    <style name="ToolBarStyle" parent="@style/ThemeOverlay.AppCompat.Light">
         <item name="android:background">?attr/colorPrimary</item>
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">@dimen/toolbar_height</item>
-        <item name="android:minHeight">@dimen/toolbar_height</item>
+        <item name="android:layout_height">?attr/toolbarHeight</item>
+        <item name="android:minHeight">?attr/toolbarHeight</item>
+        <item name="actionBarSize">?attr/toolbarHeight</item>
+
     </style>
+
+    <attr name="toolbarHeight" format="reference"/>
 
     <dimen name="toolbar_height">48dp</dimen>
 
@@ -36,37 +43,44 @@
         <item name="colorControlHighlight">#1000</item>
         <item name="windowActionBar">false</item>
         <item name="android:windowNoTitle">true</item>
-        <item name="windowActionBarOverlay">true</item>
         <!--<item name="android:listDivider">@drawable/list_item_divider</item>-->
         <!--<item name="android:dividerHeight">0.67dp</item>-->
         <!--<item name="android:cacheColorHint">@color/translate</item>-->
         <!--<item name="android:textCursorDrawable" tools:ignore="NewApi">@drawable/edit_text_cursor-->
         <!--</item>-->
         <!--<item name="android:listSelector">@drawable/comm_list_selector_light</item>-->
-        <item name="actionButtonStyle">@style/ActionBarButtonStyle</item>
+        <!--<item name="actionButtonStyle">@style/ActionBarButtonStyle</item>-->
         <item name="toolbarNavigationButtonStyle">@style/ActionBarNavigationButtonStyle</item>
-        <item name="actionMenuTextAppearance">@style/AppTheme.ActionBar.TitleText</item>
-        <item name="actionMenuTextColor">#FFF</item>
-        <item name="actionOverflowButtonStyle">@style/ActionButton.Overflow</item>
+        <!--<item name="actionMenuTextAppearance">@style/AppTheme.ActionBar.TitleText</item>-->
+        <!--<item name="actionMenuTextColor">#FFF</item>-->
+        <item name="android:textColorSecondary">#FFF</item>
+        <item name="toolbarHeight">@dimen/toolbar_height</item>
     </style>
 
-    <style name="ActionButton.Overflow" parent="android:style/Widget.Holo.Light.ActionButton.Overflow">
+    <style name="ActionButton.Overflow" parent="Widget.AppCompat.Light.ActionButton.Overflow">
         <item name="android:src">@mipmap/ic_launcher</item>
     </style>
 
 
     <style name="ActionBarNavigationButtonStyle" parent="Widget.AppCompat.Toolbar.Button.Navigation">
-        <item name="android:background">@drawable/button_selector_shadow</item>
+        <!--<item name="android:background">@drawable/button_selector_shadow</item>-->
         <item name="android:paddingLeft">0dp</item>
         <item name="android:minWidth">48dp</item>
+        <item name="android:scaleType">center</item>
     </style>
 
     <style name="ActionBarButtonStyle" parent="Base.Widget.AppCompat.ActionButton">
-        <item name="android:background">@drawable/button_selector_shadow</item>
+        <!--<item name="android:background">@drawable/button_selector_shadow</item>-->
+        <item name="android:minWidth">52dp</item>
+        <item name="android:height">?attr/toolbarHeight</item>
     </style>
 
     <style name="AppTheme.ActionBar.TitleText" parent="TextAppearance.AppCompat.Widget.ActionBar.Title">
         <item name="android:textSize">16sp</item>
         <item name="android:textColor">#FFF</item>
+    </style>
+
+    <style name="ToolbarPopupTheme" parent="@style/ThemeOverlay.AppCompat.Light">
+        <item name="actionOverflowMenuStyle">@style/OverflowMenuStyle</item>
     </style>
 </resources>

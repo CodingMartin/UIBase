@@ -5,9 +5,8 @@ package com.martin.framework.base;
  * Author:Martin
  * Date:2016/8/15
  */
-public interface BaseView<T extends BasePresenter> extends BaseRevealView {
+public interface BaseView extends BaseRevealView {
 
-    void setPresenter(T presenter);
-
+//    void setPresenter(T presenter);
 
 }

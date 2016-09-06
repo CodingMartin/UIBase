@@ -41,7 +41,6 @@
         android:layout_marginTop="16dp">
 
         <EditText
-
             android:inputType="textPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
@@ -50,6 +49,7 @@
 
 
     <Button
+        android:id="@+id/btn_login"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/til_password"

@@ -1,11 +1,13 @@
 package com.martin.framework.module.home.v;
 
 import android.content.Intent;
-import android.support.annotation.Nullable;
 import android.support.v7.widget.ListPopupWindow;
+import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.martin.framework.R;
 import com.martin.framework.base.BaseCompatActivity;
@@ -13,7 +15,6 @@ import com.martin.framework.module.home.c.MainContract;
 import com.martin.framework.module.home.p.MainPresenter;
 import com.martin.framework.module.splash.v.LoginActivity;
 import com.martin.framework.module.test.PlaceholderActivity;
-import com.martin.framework.utils.CheckUtil;
 import com.martin.framework.view.PlaceholderPopWindow;
 
 public class MainActivity extends BaseCompatActivity implements MainContract.View {
@@ -31,8 +32,7 @@ public class MainActivity extends BaseCompatActivity implements MainContract.Vie
      * 初始化视图
      */
     @Override
-    protected void initView() {
-
+    protected void bindView() {
     }
 
     /**
@@ -40,7 +40,10 @@ public class MainActivity extends BaseCompatActivity implements MainContract.Vie
      */
     @Override
     protected void bindEvent() {
+    }
 
+    @Override protected boolean hasBackButton() {
+        return super.hasBackButton();
     }
 
     /**
@@ -56,35 +59,16 @@ public class MainActivity extends BaseCompatActivity implements MainContract.Vie
         return true;
     }
 
-    @Override
-    protected void onMoreItemSelected(MenuItem item) {
-        if (mListPopupWindow == null) {
-            mListPopupWindow = createDefaultMenuPopup(getToolbar(), new int[]{R.mipmap.ic_launcher, R.mipmap.ic_launcher, R.mipmap.ic_launcher}, new int[]{R.string.app_name, R.string.app_name, R.string.app_name});
-        }
-        if (mListPopupWindow.isShowing()) {
-            mListPopupWindow.dismiss();
-        } else {
-            mListPopupWindow.show();
-        }
 
-    }
-
-    @Override
-    protected boolean setupOptionsMenu(Menu menu, @Nullable MenuItem itemMore, @Nullable MenuItem itemSub) {
-        return super.setupOptionsMenu(menu, itemMore, itemSub);
-    }
-
-
-    @Override
-    public void setPresenter(MainContract.Presenter presenter) {
-        CheckUtil.checkNotNull(presenter);
-        this.mPresenter = presenter;
-    }
 
     @Override
     protected void onResume() {
         super.onResume();
-        mPresenter.start();
+    }
+
+    @Override public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_more_toolbar,menu);
+        return true;
     }
 
     public void showToast(View view) {
@@ -105,7 +89,55 @@ public class MainActivity extends BaseCompatActivity implements MainContract.Vie
 
     public void showPop(View view) {
        startActivity(new Intent(this, PlaceholderActivity.class));
+//        ActivityOptionsCompat compat = ActivityOptionsCompat.makeScaleUpAnimation(view, view.getWidth() / 2, view.getHeight() / 2, 0, 0);
+//        ActivityCompat.startActivity(this, new Intent(this, PlaceholderActivity.class), compat.toBundle());
     }
 
+
+    static class Adapter extends RecyclerView.Adapter<Adapter.Holder> {
+
+        private OnItemClickListener mItemClickListener;
+
+        public void setOnItemClickListener(OnItemClickListener li) {
+            mItemClickListener = li;
+        }
+
+        @Override
+        public Adapter.Holder onCreateViewHolder(ViewGroup parent, int viewType) {
+            View item = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_simple_menu_item, parent, false);
+            return new Holder(item);
+        }
+
+        @Override
+        public void onBindViewHolder(final Adapter.Holder holder, int position) {
+            holder.tv.setText("item " + position);
+            if(mItemClickListener != null) {
+                holder.itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        mItemClickListener.onItemClick(holder.getLayoutPosition(),
+                                holder.tv.getText().toString());
+                    }
+                });
+            }
+        }
+
+        @Override
+        public int getItemCount() {
+            return 50;
+        }
+
+        class Holder extends RecyclerView.ViewHolder {
+            TextView tv;
+            public Holder(View itemView) {
+                super(itemView);
+                tv = (TextView) itemView.findViewById(android.R.id.text1);
+            }
+        }
+
+        interface OnItemClickListener {
+            void onItemClick(int position, String text);
+        }
+    }
 
 }

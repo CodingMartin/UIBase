@@ -96,7 +96,7 @@ public class PlaceholderView extends FrameLayout {
         if (mViewState != STATE_NORMAL) setVisibility(View.VISIBLE);
     }
 
-    public void dismss() {
+    public void dismiss() {
         setViewState(STATE_NORMAL);
     }
 

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.martin.framework">
+          package="com.martin.framework">
 
     <application
         android:name=".App"
@@ -11,13 +11,19 @@
         android:theme="@style/AppTheme">
         <activity android:name=".module.home.v.MainActivity">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.MAIN"/>
 
-                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".module.splash.v.LoginActivity" />
-        <activity android:name=".module.test.PlaceholderActivity"></activity>
+        <activity android:name=".module.splash.v.LoginActivity"/>
+        <activity android:name=".module.test.PlaceholderActivity"/>
+        <activity android:name=".module.splash.v.RegisterActivity">
+        </activity>
+        <activity android:name=".module.splash.v.TestActivity">
+        </activity>
+        <activity android:name=".module.splash.v.SplashActivity">
+        </activity>
     </application>
 
 </manifest>

@@ -1,6 +1,7 @@
 package com.martin.framework.base;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.annotation.CallSuper;
@@ -40,26 +41,39 @@ public abstract class BaseCompatActivity extends AppCompatActivity implements Ba
     @Nullable
     @BindView(R.id.toolbar_title_view)
     View mTitleView;
-    private boolean useSystemUI;
     private boolean defineToolbarSelf;
     private RevealController mRevealController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        preSetContentView();
         setContentView(getContentViewId());
-        useSystemUI = isUseSystemUI(); //使用系统特性
-        bindBaseContent();
+        handleIntent(getIntent(), savedInstanceState);
+        bindBase();
         setupTopBar();
-        initView();
+        bindView();
         bindEvent();
         bindData();
+    }
+
+    protected void handleIntent(Intent intent, Bundle savedInstanceState) {
+    }
+
+    protected RevealController getRevealController() {
+        return mRevealController;
+    }
+
+    /**
+     * 先于{@link #setContentView(int)}
+     */
+    protected void preSetContentView() {
     }
 
     /***
      * 这里用来绑定一些公共的内容,如...
      */
-    private void bindBaseContent() {
+    private void bindBase() {
         ButterKnife.bind(this);
         mRevealController = new RevealController(this);
         mRevealController.setPlaceHolderBuilder(setupPlaceHolderBuild());
@@ -88,7 +102,9 @@ public abstract class BaseCompatActivity extends AppCompatActivity implements Ba
     /**
      * 初始化视图
      */
-    protected abstract void initView();
+    protected void bindView() {
+
+    }
 
     @LayoutRes
     public abstract int getContentViewId();
@@ -122,6 +138,10 @@ public abstract class BaseCompatActivity extends AppCompatActivity implements Ba
         }
     }
 
+    /**
+     * 设置标题
+     * @return
+     */
     protected CharSequence getMainTitle() {
         return getTitle();
     }
@@ -137,7 +157,7 @@ public abstract class BaseCompatActivity extends AppCompatActivity implements Ba
             setSupportActionBar(mToolbar);
             ActionBar mActionBar = getSupportActionBar();
             if (mActionBar != null) {
-                mActionBar.setDisplayShowTitleEnabled(useSystemUI);
+                mActionBar.setDisplayShowTitleEnabled(isUseSystemUI());
             }
 
             View childView = mToolbar.getChildAt(0);
@@ -158,7 +178,7 @@ public abstract class BaseCompatActivity extends AppCompatActivity implements Ba
     private void useSystemToolbar() {
         defineToolbarSelf = false;
         if (hasBackButton() && mToolbar != null) {
-            mToolbar.setNavigationIcon(R.mipmap.ic_launcher);
+            mToolbar.setNavigationIcon(R.mipmap.ic_back);
             mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -194,7 +214,7 @@ public abstract class BaseCompatActivity extends AppCompatActivity implements Ba
      * 是否存在返回按钮 (含Toolbar)
      */
     protected boolean hasBackButton() {
-        return false;
+        return true;
     }
 
     /***
@@ -295,11 +315,6 @@ public abstract class BaseCompatActivity extends AppCompatActivity implements Ba
         return mTitleView;
     }
 
-    @Override
-    public void addContentView(View view, ViewGroup.LayoutParams params) {
-        super.addContentView(view, params);
-    }
-
     /**
      * 隐藏Loading
      */
@@ -380,19 +395,8 @@ public abstract class BaseCompatActivity extends AppCompatActivity implements Ba
         super.onConfigurationChanged(newConfig);
     }
 
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        outState.putBoolean("useSystemUI", useSystemUI);
-        outState.putBoolean("defineToolbarSelf", defineToolbarSelf);
-        super.onSaveInstanceState(outState);
-    }
-
-    @Override
-    protected void onRestoreInstanceState(Bundle savedInstanceState) {
-        super.onRestoreInstanceState(savedInstanceState);
-        if (savedInstanceState == null) return;
-        useSystemUI = savedInstanceState.getBoolean("useSystemUI");
-        defineToolbarSelf = savedInstanceState.getBoolean("defineToolbarSelf");
+    @Override protected void onResume() {
+        super.onResume();
     }
 
     @CallSuper
