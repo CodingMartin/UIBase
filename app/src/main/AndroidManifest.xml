@@ -26,6 +26,8 @@
         </activity>
         <activity android:name=".module.splash.v.Test2Activity">
         </activity>
+        <activity android:name=".module.splash.v.ImageActivity">
+        </activity>
     </application>
 
 </manifest>

@@ -6,6 +6,7 @@ import android.support.design.widget.TextInputLayout;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import com.jaeger.library.StatusBarUtil;
 import com.martin.framework.R;
 import com.martin.framework.base.mvp.BaseIntricateActivity;
 import com.martin.framework.module.home.v.MainActivity;
@@ -25,6 +26,13 @@ public class LoginActivity extends BaseIntricateActivity<LoginPresenter> impleme
     @Override
     protected void bindEvent() {
 
+    }
+
+    @Override protected void setSystemStatus() {
+        StatusBarUtil.setTransparent(this);
+    }
+
+    @Override protected void bindView() {
     }
 
     @Override

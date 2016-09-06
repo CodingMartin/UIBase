@@ -6,6 +6,7 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -17,6 +18,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.jaeger.library.StatusBarUtil;
 import com.martin.framework.R;
 import com.martin.framework.common.RevealController;
 import com.martin.framework.view.EmptyView;
@@ -48,6 +50,7 @@ public abstract class BaseCompatActivity extends AppCompatActivity implements Ba
         bindBase();
         setupTopBar();
         bindView();
+        setSystemStatus();
         bindEvent();
         bindData();
     }
@@ -63,6 +66,7 @@ public abstract class BaseCompatActivity extends AppCompatActivity implements Ba
      * 先于{@link #setContentView(int)}
      */
     protected void preSetContentView() {
+
     }
 
     /***
@@ -73,6 +77,15 @@ public abstract class BaseCompatActivity extends AppCompatActivity implements Ba
         mRevealController = new RevealController(this);
         mRevealController.bindEmptyView(mEmptyView);
         if (mEmptyView != null) mEmptyView.setOnReloadListener(this);
+
+
+    }
+
+    /**
+     * 设置状态栏
+     */
+    protected void setSystemStatus() {
+        StatusBarUtil.setColorNoTranslucent(this, ContextCompat.getColor(this,R.color.colorPrimaryDark));
     }
 
     /**

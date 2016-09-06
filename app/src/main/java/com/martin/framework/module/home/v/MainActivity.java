@@ -9,8 +9,11 @@ import com.martin.framework.R;
 import com.martin.framework.base.BaseCompatActivity;
 import com.martin.framework.module.home.c.MainContract;
 import com.martin.framework.module.home.p.MainPresenter;
+import com.martin.framework.module.splash.v.ImageActivity;
 import com.martin.framework.module.splash.v.LoginActivity;
 import com.martin.framework.module.test.PlaceholderActivity;
+
+import butterknife.OnClick;
 
 public class MainActivity extends BaseCompatActivity implements MainContract.View {
 
@@ -54,14 +57,13 @@ public class MainActivity extends BaseCompatActivity implements MainContract.Vie
     }
 
 
-
     @Override
     protected void onResume() {
         super.onResume();
     }
 
     @Override public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_more_toolbar,menu);
+        getMenuInflater().inflate(R.menu.menu_more_toolbar, menu);
         return true;
     }
 
@@ -82,8 +84,11 @@ public class MainActivity extends BaseCompatActivity implements MainContract.Vie
     }
 
     public void showPop(View view) {
-       startActivity(new Intent(this, PlaceholderActivity.class));
+        startActivity(new Intent(this, PlaceholderActivity.class));
     }
 
-
+    @OnClick(R.id.btn_picture)
+    public void goPicture() {
+        startActivity(new Intent(this, ImageActivity.class));
+    }
 }
