@@ -6,12 +6,10 @@ import android.view.MenuItem;
 
 import com.martin.framework.R;
 import com.martin.framework.base.BaseCompatActivity;
-import com.martin.framework.view.PlaceholderPopWindow;
-import com.martin.framework.view.PlaceholderView;
+import com.martin.framework.view.EmptyView;
 
 public class PlaceholderActivity extends BaseCompatActivity {
 
-    private PlaceholderPopWindow window;
 
     @Override
     protected void bindData() {
@@ -41,25 +39,25 @@ public class PlaceholderActivity extends BaseCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_empty:
-                showPlaceholder(PlaceholderView.STATE_NODATA);
+                showEmptyView(EmptyView.STATE_NODATA);
                 break;
             case R.id.menu_error:
-                showPlaceholder(PlaceholderView.STATE_ERROR);
+                showEmptyView(EmptyView.STATE_ERROR);
                 break;
             case R.id.menu_loading:
-                showPlaceholder(PlaceholderView.STATE_LOADING);
+                showEmptyView(EmptyView.STATE_LOADING);
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        showPlaceholder(PlaceholderView.STATE_NODATA);
+                        showEmptyView(EmptyView.STATE_NODATA);
                     }
                 }, 800);
                 break;
             case R.id.menu_nonet:
-                showPlaceholder(PlaceholderView.STATE_NONET);
+                showEmptyView(EmptyView.STATE_NONET);
                 break;
             case R.id.menu_normal:
-                showPlaceholder(PlaceholderView.STATE_NORMAL);
+                showEmptyView(EmptyView.STATE_NORMAL);
                 break;
         }
         return true;

@@ -2,7 +2,7 @@ package com.martin.framework.module.splash.p;
 
 import android.support.annotation.NonNull;
 
-import com.martin.framework.base.BasePresenterImpl;
+import com.martin.framework.base.mvp.BasePresenterImpl;
 import com.martin.framework.module.splash.c.SplashContract;
 import com.martin.framework.module.splash.m.SplashDataProvider;
 

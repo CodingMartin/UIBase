@@ -1,4 +1,6 @@
-package com.martin.framework.base;
+package com.martin.framework.base.mvp;
+
+import com.martin.framework.base.BaseRevealView;
 
 /**
  * Desc:

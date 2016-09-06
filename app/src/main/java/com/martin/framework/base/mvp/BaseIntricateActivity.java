@@ -1,8 +1,10 @@
-package com.martin.framework.base;
+package com.martin.framework.base.mvp;
 
 import android.os.Bundle;
 import android.support.annotation.CallSuper;
 import android.support.annotation.NonNull;
+
+import com.martin.framework.base.BaseCompatActivity;
 
 /**
  * Desc:

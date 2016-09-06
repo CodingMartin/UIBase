@@ -2,15 +2,16 @@ package com.martin.framework.view;
 
 import android.annotation.TargetApi;
 import android.content.Context;
-import android.graphics.Color;
 import android.os.Build;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.IntDef;
 import android.support.annotation.StringRes;
 import android.util.AttributeSet;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.ViewStub;
 import android.widget.FrameLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.martin.framework.R;
@@ -23,14 +24,14 @@ import java.lang.annotation.RetentionPolicy;
  * Author:Martin
  * Date:2016/8/17
  */
-public class PlaceholderView extends FrameLayout {
+public class EmptyView extends FrameLayout {
     public static final int STATE_NORMAL = 0x00;
     public static final int STATE_LOADING = 0x01;
     public static final int STATE_NODATA = 0x02;
     public static final int STATE_ERROR = 0x03;
     public static final int STATE_NONET = 0x04;
     @ViewState
-    private int mViewState = STATE_NORMAL;
+    private int mViewState = -1;
     private ViewStub stubLoading, stubNoNet, stubError, stubEmpty;
     private View viewLoading, viewNoNet, viewError, viewEmpty;
     private OnReloadListener mOnReloadListener;
@@ -46,30 +47,46 @@ public class PlaceholderView extends FrameLayout {
         this.mOnReloadListener = listener;
     }
 
+    public void setLocation(boolean b) {
+        ViewGroup.LayoutParams lp = getLayoutParams();
+        if (lp instanceof RelativeLayout.LayoutParams) {
+            RelativeLayout.LayoutParams rl = (RelativeLayout.LayoutParams) lp;
+            if (b) {
+                rl.addRule(RelativeLayout.BELOW, R.id.toolbar);
+            }else {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+                    rl.removeRule(RelativeLayout.BELOW);
+                } else {
+                    rl.addRule(RelativeLayout.BELOW, 0);
+                }
+            }
+        }
+    }
+
     @IntDef(value = {STATE_NORMAL, STATE_LOADING, STATE_NODATA, STATE_ERROR, STATE_NONET})
     @Retention(RetentionPolicy.SOURCE)
     public @interface ViewState {
     }
 
 
-    public PlaceholderView(Context context) {
+    public EmptyView(Context context) {
         super(context);
         init();
     }
 
-    public PlaceholderView(Context context, AttributeSet attrs) {
+    public EmptyView(Context context, AttributeSet attrs) {
         super(context, attrs);
         init();
     }
 
-    public PlaceholderView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public EmptyView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init();
     }
 
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    public PlaceholderView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    public EmptyView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
         init();
 
@@ -77,13 +94,15 @@ public class PlaceholderView extends FrameLayout {
 
     private void init() {
         inflate(getContext(), R.layout.layout_placeholder_view, this);
-        setBackgroundColor(Color.WHITE);
         stubLoading = (ViewStub) findViewById(R.id.vs_ph_loading);
         stubEmpty = (ViewStub) findViewById(R.id.vs_ph_empty);
         stubError = (ViewStub) findViewById(R.id.vs_ph_error);
         stubNoNet = (ViewStub) findViewById(R.id.vs_ph_no_net);
-        setVisibility(GONE);
         show(STATE_NORMAL);
+    }
+
+    @Override protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
     }
 
     @ViewState
@@ -100,7 +119,7 @@ public class PlaceholderView extends FrameLayout {
         setViewState(STATE_NORMAL);
     }
 
-    public void setViewState(@ViewState int state) {
+    private void setViewState(@ViewState int state) {
         if (mViewState == state) {
             return;
         }
@@ -112,6 +131,7 @@ public class PlaceholderView extends FrameLayout {
                     stubLoading.inflate();
                     viewLoading = findViewById(R.id.inflated_id_ph_loading);
                 } else {
+                    stubLoading.setVisibility(View.VISIBLE);
                     viewLoading.setVisibility(View.VISIBLE);
                 }
                 setListener(false);
@@ -124,6 +144,7 @@ public class PlaceholderView extends FrameLayout {
                     viewEmpty = findViewById(R.id.inflated_id_ph_empty);
                 } else {
                     stubEmpty.setVisibility(View.VISIBLE);
+                    viewEmpty.setVisibility(VISIBLE);
                 }
                 if (emptyTip != -1)
                     ((TextView) viewEmpty.findViewById(R.id.ph_tv_no_data)).setText(emptyTip);
@@ -136,6 +157,7 @@ public class PlaceholderView extends FrameLayout {
                     viewError = findViewById(R.id.inflated_id_ph_error);
                 } else {
                     viewError.setVisibility(View.VISIBLE);
+                    stubError.setVisibility(View.VISIBLE);
                 }
                 setListener(true);
                 if (errorTip != -1)
@@ -146,6 +168,7 @@ public class PlaceholderView extends FrameLayout {
                     stubNoNet.inflate();
                     viewNoNet = findViewById(R.id.inflated_id_ph_no_net);
                 } else {
+                    stubNoNet.setVisibility(View.VISIBLE);
                     viewNoNet.setVisibility(View.VISIBLE);
                 }
                 if (noNetIcon != -1) // TODO: 2016/8/17
@@ -153,7 +176,7 @@ public class PlaceholderView extends FrameLayout {
                         ((TextView) viewNoNet.findViewById(R.id.ph_tv_no_network)).setText(noNetTip);
                 setListener(true);
                 break;
-            default: // NORMAL
+            case STATE_NORMAL: // NORMAL
                 setVisibility(GONE);
                 setListener(false);
                 break;

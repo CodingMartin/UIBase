@@ -3,7 +3,7 @@ package com.martin.framework.module.splash.p;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
 
-import com.martin.framework.base.BasePresenterImpl;
+import com.martin.framework.base.mvp.BasePresenterImpl;
 import com.martin.framework.module.splash.c.LoginContract;
 import com.martin.framework.module.splash.m.LoginDataProvider;
 

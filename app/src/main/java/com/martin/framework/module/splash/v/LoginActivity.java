@@ -10,7 +10,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.martin.framework.R;
-import com.martin.framework.base.BaseIntricateActivity;
+import com.martin.framework.base.mvp.BaseIntricateActivity;
 import com.martin.framework.module.home.v.MainActivity;
 import com.martin.framework.module.splash.c.LoginContract;
 import com.martin.framework.module.splash.p.LoginPresenter;
@@ -36,7 +36,6 @@ public class LoginActivity extends BaseIntricateActivity<LoginPresenter> impleme
                 }
 
                 @Override public void onTextChanged(CharSequence s, int start, int before, int count) {
-
                 }
 
                 @Override public void afterTextChanged(Editable s) {

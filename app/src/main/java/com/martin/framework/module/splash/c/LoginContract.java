@@ -1,8 +1,8 @@
 package com.martin.framework.module.splash.c;
 
-import com.martin.framework.base.BaseDataProvider;
-import com.martin.framework.base.BasePresenter;
-import com.martin.framework.base.BaseView;
+import com.martin.framework.base.mvp.BaseDataProvider;
+import com.martin.framework.base.mvp.BasePresenter;
+import com.martin.framework.base.mvp.BaseView;
 import com.martin.framework.module.splash.m.LoginDataProvider;
 
 /**

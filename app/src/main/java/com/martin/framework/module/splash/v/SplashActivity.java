@@ -3,7 +3,7 @@ package com.martin.framework.module.splash.v;
 import android.support.annotation.NonNull;
 
 import com.martin.framework.R;
-import com.martin.framework.base.BaseIntricateActivity;
+import com.martin.framework.base.mvp.BaseIntricateActivity;
 import com.martin.framework.module.splash.c.SplashContract;
 import com.martin.framework.module.splash.p.SplashPresenter;
 

@@ -1,8 +1,8 @@
 package com.martin.framework.module.home.c;
 
-import com.martin.framework.base.BaseDataProvider;
-import com.martin.framework.base.BasePresenter;
-import com.martin.framework.base.BaseView;
+import com.martin.framework.base.mvp.BaseDataProvider;
+import com.martin.framework.base.mvp.BasePresenter;
+import com.martin.framework.base.mvp.BaseView;
 
 /**
  * Desc:
@@ -11,7 +11,7 @@ import com.martin.framework.base.BaseView;
  */
 public interface MainContract {
 
-    interface View extends BaseView<Presenter> {
+    interface View extends BaseView {
 
     }
 

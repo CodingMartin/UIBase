@@ -4,14 +4,10 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.support.annotation.CallSuper;
 import android.support.annotation.LayoutRes;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.annotation.StringRes;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.ListPopupWindow;
 import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -23,8 +19,7 @@ import android.widget.Toast;
 
 import com.martin.framework.R;
 import com.martin.framework.common.RevealController;
-import com.martin.framework.view.PlaceholderPopWindow;
-import com.martin.framework.view.PlaceholderView;
+import com.martin.framework.view.EmptyView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -34,13 +29,13 @@ import butterknife.ButterKnife;
  * Author:Martin
  * Date:2016/8/15
  */
-public abstract class BaseCompatActivity extends AppCompatActivity implements BaseRevealView, PlaceholderView.OnReloadListener {
+public abstract class BaseCompatActivity extends AppCompatActivity implements BaseRevealView, EmptyView.OnReloadListener {
     @Nullable
-    @BindView(R.id.toolbar)
-    Toolbar mToolbar;
+    @BindView(R.id.toolbar) Toolbar mToolbar;
     @Nullable
-    @BindView(R.id.toolbar_title_view)
-    View mTitleView;
+    @BindView(R.id.toolbar_title_view) View mTitleView;
+    @Nullable
+    @BindView(R.id.id_empty_view) EmptyView mEmptyView;
     private boolean defineToolbarSelf;
     private RevealController mRevealController;
 
@@ -76,17 +71,8 @@ public abstract class BaseCompatActivity extends AppCompatActivity implements Ba
     private void bindBase() {
         ButterKnife.bind(this);
         mRevealController = new RevealController(this);
-        mRevealController.setPlaceHolderBuilder(setupPlaceHolderBuild());
-    }
-
-    @CallSuper
-    protected PlaceholderPopWindow.Builder setupPlaceHolderBuild() {
-        PlaceholderPopWindow.Builder builder = new PlaceholderPopWindow.Builder(this);
-        View titleBar = findViewById(R.id.titleBar);
-        View anchor = getToolbar() == null ? titleBar == null ? findViewById(R.id.rootView) : titleBar : getToolbar();
-        builder.anchor(anchor);
-        builder.setListener(this);
-        return builder;
+        mRevealController.bindEmptyView(mEmptyView);
+        if (mEmptyView != null) mEmptyView.setOnReloadListener(this);
     }
 
     /**
@@ -140,6 +126,7 @@ public abstract class BaseCompatActivity extends AppCompatActivity implements Ba
 
     /**
      * 设置标题
+     *
      * @return
      */
     protected CharSequence getMainTitle() {
@@ -298,13 +285,6 @@ public abstract class BaseCompatActivity extends AppCompatActivity implements Ba
         return false;
     }
 
-    /**
-     * 这只是一个示范
-     */
-    public ListPopupWindow createDefaultMenuPopup(@NonNull View anchorView, int[] icons, @NonNull @StringRes int[] titles) {
-        return mRevealController.createDefaultMenuPopup(anchorView, icons, titles);
-    }
-
     @Nullable
     public Toolbar getToolbar() {
         return mToolbar;
@@ -366,24 +346,25 @@ public abstract class BaseCompatActivity extends AppCompatActivity implements Ba
         mRevealController.showMessageDialog(message, ok, okClickListener);
     }
 
+    @Override public void hideEmptyView() {
+        mRevealController.hideEmptyView();
+    }
+
     @Override
     public void showMessageDialog(String message, String okTip) {
         mRevealController.showMessageDialog(message, okTip);
     }
 
     @Override
-    public void showPlaceholder(PlaceholderPopWindow.Builder builder, @PlaceholderView.ViewState int state) {
-        mRevealController.showPlaceholder(builder, state);
-    }
-
-    @Override
-    public void showPlaceholder(@PlaceholderView.ViewState int state) {
-        mRevealController.showPlaceholder(state);
+    public void showEmptyView(@EmptyView.ViewState int state) {
+        mRevealController.showEmptyView(state);
     }
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if (keyCode == KeyEvent.KEYCODE_MENU && event.getAction() == KeyEvent.ACTION_DOWN) {
+        if (keyCode == KeyEvent.KEYCODE_MENU
+                && event.getAction() == KeyEvent.ACTION_DOWN
+                && !defineToolbarSelf) {
             onMoreItemSelected(null);
             return true;
         }
@@ -399,14 +380,8 @@ public abstract class BaseCompatActivity extends AppCompatActivity implements Ba
         super.onResume();
     }
 
-    @CallSuper
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        mRevealController.handleOnBackPressed();
-    }
-
     @Override
     public void onReload() {
+
     }
 }

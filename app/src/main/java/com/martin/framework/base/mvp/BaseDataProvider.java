@@ -1,4 +1,4 @@
-package com.martin.framework.base;
+package com.martin.framework.base.mvp;
 
 /**
  * Desc:

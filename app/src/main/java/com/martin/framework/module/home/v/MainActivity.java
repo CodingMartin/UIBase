@@ -15,13 +15,11 @@ import com.martin.framework.module.home.c.MainContract;
 import com.martin.framework.module.home.p.MainPresenter;
 import com.martin.framework.module.splash.v.LoginActivity;
 import com.martin.framework.module.test.PlaceholderActivity;
-import com.martin.framework.view.PlaceholderPopWindow;
 
 public class MainActivity extends BaseCompatActivity implements MainContract.View {
 
     private ListPopupWindow mListPopupWindow;
     private MainContract.Presenter mPresenter;
-    private PlaceholderPopWindow window;
 
     @Override
     public int getContentViewId() {

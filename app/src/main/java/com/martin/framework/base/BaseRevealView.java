@@ -2,8 +2,7 @@ package com.martin.framework.base;
 
 import android.content.DialogInterface;
 
-import com.martin.framework.view.PlaceholderPopWindow;
-import com.martin.framework.view.PlaceholderView;
+import com.martin.framework.view.EmptyView;
 
 /**
  * Desc:
@@ -39,6 +38,8 @@ public interface BaseRevealView {
 
     void showMessageDialog(String message, String ok, DialogInterface.OnClickListener okClickListener);
 
-    void showPlaceholder(PlaceholderPopWindow.Builder builder,@PlaceholderView.ViewState int state);
-    void showPlaceholder(@PlaceholderView.ViewState int state);
+    void showEmptyView(@EmptyView.ViewState int state);
+
+    void hideEmptyView();
+
 }
