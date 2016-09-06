@@ -131,7 +131,6 @@ public class EmptyView extends FrameLayout {
                     stubLoading.inflate();
                     viewLoading = findViewById(R.id.inflated_id_ph_loading);
                 } else {
-                    stubLoading.setVisibility(View.VISIBLE);
                     viewLoading.setVisibility(View.VISIBLE);
                 }
                 setListener(false);
@@ -143,7 +142,6 @@ public class EmptyView extends FrameLayout {
                     stubEmpty.inflate();
                     viewEmpty = findViewById(R.id.inflated_id_ph_empty);
                 } else {
-                    stubEmpty.setVisibility(View.VISIBLE);
                     viewEmpty.setVisibility(VISIBLE);
                 }
                 if (emptyTip != -1)
@@ -157,7 +155,6 @@ public class EmptyView extends FrameLayout {
                     viewError = findViewById(R.id.inflated_id_ph_error);
                 } else {
                     viewError.setVisibility(View.VISIBLE);
-                    stubError.setVisibility(View.VISIBLE);
                 }
                 setListener(true);
                 if (errorTip != -1)
@@ -168,7 +165,6 @@ public class EmptyView extends FrameLayout {
                     stubNoNet.inflate();
                     viewNoNet = findViewById(R.id.inflated_id_ph_no_net);
                 } else {
-                    stubNoNet.setVisibility(View.VISIBLE);
                     viewNoNet.setVisibility(View.VISIBLE);
                 }
                 if (noNetIcon != -1) // TODO: 2016/8/17

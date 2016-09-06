@@ -212,7 +212,7 @@ public abstract class BaseCompatActivity extends AppCompatActivity implements Ba
      */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        if (!defineToolbarSelf)
+        if (!defineToolbarSelf && !isUseSystemUI())
             getMenuInflater().inflate(R.menu.menu_simple_toolbar, menu);
         return (!defineToolbarSelf) || super.onCreateOptionsMenu(menu);
     }
@@ -226,7 +226,7 @@ public abstract class BaseCompatActivity extends AppCompatActivity implements Ba
      */
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
-        if (!defineToolbarSelf) {
+        if (!defineToolbarSelf && !isUseSystemUI()) {
             MenuItem itemMore = menu.findItem(R.id.id_menu_more);
             MenuItem itemSub = menu.findItem(R.id.id_menu_sub);
             if (!setupOptionsMenu(menu, itemMore, itemSub)) {
@@ -243,7 +243,7 @@ public abstract class BaseCompatActivity extends AppCompatActivity implements Ba
      */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (!defineToolbarSelf && !setupOptionsItemSelected(item)) {
+        if (!defineToolbarSelf && !setupOptionsItemSelected(item) && !isUseSystemUI()) {
             switch (item.getItemId()) {
                 case R.id.id_menu_more:
                     onMoreItemSelected(item);
@@ -364,7 +364,7 @@ public abstract class BaseCompatActivity extends AppCompatActivity implements Ba
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_MENU
                 && event.getAction() == KeyEvent.ACTION_DOWN
-                && !defineToolbarSelf) {
+                && !isUseSystemUI()) {
             onMoreItemSelected(null);
             return true;
         }
@@ -374,10 +374,6 @@ public abstract class BaseCompatActivity extends AppCompatActivity implements Ba
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
-    }
-
-    @Override protected void onResume() {
-        super.onResume();
     }
 
     @Override

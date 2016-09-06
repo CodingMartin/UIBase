@@ -2,12 +2,8 @@ package com.martin.framework.module.home.v;
 
 import android.content.Intent;
 import android.support.v7.widget.ListPopupWindow;
-import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.martin.framework.R;
 import com.martin.framework.base.BaseCompatActivity;
@@ -41,7 +37,7 @@ public class MainActivity extends BaseCompatActivity implements MainContract.Vie
     }
 
     @Override protected boolean hasBackButton() {
-        return super.hasBackButton();
+        return false;
     }
 
     /**
@@ -87,55 +83,7 @@ public class MainActivity extends BaseCompatActivity implements MainContract.Vie
 
     public void showPop(View view) {
        startActivity(new Intent(this, PlaceholderActivity.class));
-//        ActivityOptionsCompat compat = ActivityOptionsCompat.makeScaleUpAnimation(view, view.getWidth() / 2, view.getHeight() / 2, 0, 0);
-//        ActivityCompat.startActivity(this, new Intent(this, PlaceholderActivity.class), compat.toBundle());
     }
 
-
-    static class Adapter extends RecyclerView.Adapter<Adapter.Holder> {
-
-        private OnItemClickListener mItemClickListener;
-
-        public void setOnItemClickListener(OnItemClickListener li) {
-            mItemClickListener = li;
-        }
-
-        @Override
-        public Adapter.Holder onCreateViewHolder(ViewGroup parent, int viewType) {
-            View item = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_simple_menu_item, parent, false);
-            return new Holder(item);
-        }
-
-        @Override
-        public void onBindViewHolder(final Adapter.Holder holder, int position) {
-            holder.tv.setText("item " + position);
-            if(mItemClickListener != null) {
-                holder.itemView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        mItemClickListener.onItemClick(holder.getLayoutPosition(),
-                                holder.tv.getText().toString());
-                    }
-                });
-            }
-        }
-
-        @Override
-        public int getItemCount() {
-            return 50;
-        }
-
-        class Holder extends RecyclerView.ViewHolder {
-            TextView tv;
-            public Holder(View itemView) {
-                super(itemView);
-                tv = (TextView) itemView.findViewById(android.R.id.text1);
-            }
-        }
-
-        interface OnItemClickListener {
-            void onItemClick(int position, String text);
-        }
-    }
 
 }

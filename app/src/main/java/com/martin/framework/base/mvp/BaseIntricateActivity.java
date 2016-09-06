@@ -17,7 +17,7 @@ public abstract class BaseIntricateActivity<P extends BasePresenterImpl> extends
 
 
     @CallSuper @Override protected void bindData() {
-        mPresenter = getPresenter();
+        mPresenter = bindPresenter();
     }
 
     @Override protected void onCreate(Bundle savedInstanceState) {
