@@ -1,8 +1,6 @@
-package com.martin.framework.base;
+package com.martin.framework.view;
 
 import android.content.DialogInterface;
-
-import com.martin.framework.view.EmptyView;
 
 /**
  * Desc:

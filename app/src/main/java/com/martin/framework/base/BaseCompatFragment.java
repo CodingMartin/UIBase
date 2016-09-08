@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.martin.framework.common.RevealController;
+import com.martin.framework.view.BaseRevealView;
 import com.martin.framework.view.EmptyView;
 
 import butterknife.ButterKnife;

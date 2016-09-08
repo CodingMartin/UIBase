@@ -20,7 +20,4 @@ public class TestActivity extends BaseCompatActivity {
 
     }
 
-    @Override protected CharSequence getMainTitle() {
-        return getString(R.string.app_name);
-    }
 }

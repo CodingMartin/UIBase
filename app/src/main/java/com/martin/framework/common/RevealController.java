@@ -7,7 +7,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.widget.Toast;
 
-import com.martin.framework.base.BaseRevealView;
+import com.martin.framework.view.BaseRevealView;
 import com.martin.framework.view.EmptyView;
 
 /**

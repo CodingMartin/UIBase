@@ -21,9 +21,6 @@ public class Test2Activity extends BaseIntricateActivity<LoginPresenter> impleme
 
     }
 
-    @Override protected CharSequence getMainTitle() {
-        return getString(R.string.app_name);
-    }
 
     @NonNull @Override public LoginPresenter bindPresenter() {
         return new LoginPresenter(this);

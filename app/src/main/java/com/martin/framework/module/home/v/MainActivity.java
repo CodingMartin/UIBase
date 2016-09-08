@@ -1,7 +1,6 @@
 package com.martin.framework.module.home.v;
 
 import android.content.Intent;
-import android.support.v7.widget.ListPopupWindow;
 import android.view.Menu;
 import android.view.View;
 
@@ -17,9 +16,6 @@ import butterknife.OnClick;
 
 public class MainActivity extends BaseCompatActivity implements MainContract.View {
 
-    private ListPopupWindow mListPopupWindow;
-    private MainContract.Presenter mPresenter;
-
     @Override
     public int getContentViewId() {
         return R.layout.activity_main;
@@ -30,6 +26,7 @@ public class MainActivity extends BaseCompatActivity implements MainContract.Vie
      */
     @Override
     protected void bindView() {
+        getToolBarX().setTitle("麦圈").setDisplayHomeAsUpEnabled(false);
     }
 
     /**
@@ -39,27 +36,12 @@ public class MainActivity extends BaseCompatActivity implements MainContract.Vie
     protected void bindEvent() {
     }
 
-    @Override protected boolean hasBackButton() {
-        return false;
-    }
-
     /**
      * 数据绑定
      */
     @Override
     protected void bindData() {
         new MainPresenter(this);
-    }
-
-    @Override
-    protected boolean isUseSystemUI() {
-        return true;
-    }
-
-
-    @Override
-    protected void onResume() {
-        super.onResume();
     }
 
     @Override public boolean onCreateOptionsMenu(Menu menu) {

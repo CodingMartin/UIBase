@@ -4,12 +4,7 @@
               android:layout_height="match_parent"
               android:orientation="vertical">
 
-    <android.support.v7.widget.Toolbar
-        style="@style/ToolBarStyle"
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/toolbarHeight"
-        app:popupTheme="@style/ToolbarPopupTheme"/>
+    <include layout="@layout/toolbar_simple_layout"/>
 
     <Button
         android:layout_width="match_parent"

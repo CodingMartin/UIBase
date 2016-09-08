@@ -24,7 +24,4 @@ public class SplashActivity extends BaseIntricateActivity<SplashPresenter> imple
 
     }
 
-    @Override protected CharSequence getMainTitle() {
-        return getString(R.string.app_name);
-    }
 }

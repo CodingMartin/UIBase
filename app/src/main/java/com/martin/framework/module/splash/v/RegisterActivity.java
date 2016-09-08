@@ -20,7 +20,4 @@ public class RegisterActivity extends BaseCompatActivity {
 
     }
 
-    @Override protected CharSequence getMainTitle() {
-        return getString(R.string.app_name);
-    }
 }

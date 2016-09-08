@@ -22,6 +22,7 @@ public class PlaceholderActivity extends BaseCompatActivity {
 
     @Override
     protected void bindView() {
+        super.bindView();
     }
 
     @Override

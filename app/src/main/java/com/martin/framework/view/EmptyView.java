@@ -231,4 +231,6 @@ public class EmptyView extends FrameLayout {
     public void setNoNetTip(@StringRes int noNetTip) {
         this.noNetTip = noNetTip;
     }
+
+
 }
