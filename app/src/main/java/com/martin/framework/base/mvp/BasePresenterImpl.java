@@ -1,5 +1,6 @@
 package com.martin.framework.base.mvp;
 
+import android.support.annotation.CheckResult;
 import android.support.annotation.NonNull;
 
 /**
@@ -52,6 +53,7 @@ public abstract class BasePresenterImpl<V extends BaseView, M extends BaseDataPr
      * 检测{@link #mView View是否为空}
      * @return
      */
+    @CheckResult
     protected final boolean checkNotNull() {
         return mView != null;
     }

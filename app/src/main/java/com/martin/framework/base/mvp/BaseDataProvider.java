@@ -6,4 +6,5 @@ package com.martin.framework.base.mvp;
  * Date:2016/9/1
  */
 public interface BaseDataProvider {
+
 }

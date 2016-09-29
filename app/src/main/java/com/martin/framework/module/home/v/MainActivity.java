@@ -3,6 +3,7 @@ package com.martin.framework.module.home.v;
 import android.content.Intent;
 import android.view.Menu;
 import android.view.View;
+import android.widget.Toast;
 
 import com.martin.framework.R;
 import com.martin.framework.base.BaseCompatActivity;
@@ -11,6 +12,7 @@ import com.martin.framework.module.home.p.MainPresenter;
 import com.martin.framework.module.splash.v.ImageActivity;
 import com.martin.framework.module.splash.v.LoginActivity;
 import com.martin.framework.module.test.PlaceholderActivity;
+import com.martin.framework.http.thread.ReturnThread;
 
 import butterknife.OnClick;
 
@@ -27,6 +29,20 @@ public class MainActivity extends BaseCompatActivity implements MainContract.Vie
     @Override
     protected void bindView() {
         getToolBarX().setTitle("麦圈").setDisplayHomeAsUpEnabled(false);
+        new ReturnThread<String>() {
+            @Override public String operate() {
+                try {
+                    Thread.sleep(10000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                return "麦圈";
+            }
+
+            @Override public void onOperateEnd(String result) {
+                Toast.makeText(MainActivity.this, result, Toast.LENGTH_SHORT).show();
+            }
+        }.start();
     }
 
     /**

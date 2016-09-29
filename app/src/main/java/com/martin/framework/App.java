@@ -2,7 +2,6 @@ package com.martin.framework;
 
 import android.app.Application;
 
-import com.squareup.leakcanary.LeakCanary;
 
 /**
  * Desc:
@@ -14,6 +13,5 @@ public class App extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        LeakCanary.install(this);
     }
 }
