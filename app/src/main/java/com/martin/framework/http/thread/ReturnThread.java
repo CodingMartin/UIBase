@@ -1,7 +1,7 @@
 package com.martin.framework.http.thread;
 
+import android.support.annotation.AnyThread;
 import android.support.annotation.CheckResult;
-import android.support.annotation.MainThread;
 
 import com.martin.framework.utils.ThreadUtil;
 
@@ -47,6 +47,11 @@ public abstract class ReturnThread<T> implements ThreadDelegate {
     @CheckResult
     public abstract T operate();
 
-    @MainThread
+    /**
+     * 这个方法执行在UI线程
+     *
+     * @param result
+     */
+    @AnyThread
     public abstract void onOperateEnd(T result);
 }

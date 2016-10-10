@@ -92,8 +92,6 @@ public abstract class BaseCompatActivity extends AppCompatActivity implements Ba
      */
     protected void setSystemStatus() {
         StatusBarUtil.setColorNoTranslucent(this, ContextCompat.getColor(this, R.color.colorPrimaryDark));
-
-
     }
 
     @LayoutRes

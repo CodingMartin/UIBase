@@ -2,6 +2,7 @@ package com.martin.framework.base.mvp;
 
 import android.os.Bundle;
 import android.support.annotation.CallSuper;
+import android.support.annotation.CheckResult;
 import android.support.annotation.NonNull;
 
 import com.martin.framework.base.BaseCompatActivity;
@@ -43,6 +44,7 @@ public abstract class BaseIntricateActivity<P extends BasePresenterImpl> extends
      *
      * @return
      */
+    @CheckResult
     public P getPresenter() {
         return mPresenter;
     }

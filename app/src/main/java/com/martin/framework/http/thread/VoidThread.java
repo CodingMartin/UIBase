@@ -1,6 +1,6 @@
 package com.martin.framework.http.thread;
 
-import android.support.annotation.MainThread;
+import android.support.annotation.AnyThread;
 
 import com.martin.framework.utils.ThreadUtil;
 
@@ -10,7 +10,7 @@ import com.martin.framework.utils.ThreadUtil;
  * Date:2016/9/29
  */
 
-public abstract class VoidThread implements ThreadDelegate{
+public abstract class VoidThread implements ThreadDelegate {
     private Thread mThread;
     private long mKey;
 
@@ -31,7 +31,7 @@ public abstract class VoidThread implements ThreadDelegate{
         });
     }
 
-    @MainThread
+    @AnyThread
     protected void onOperateEnd() {
 
     }
