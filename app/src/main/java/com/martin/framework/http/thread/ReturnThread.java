@@ -18,7 +18,7 @@ public abstract class ReturnThread<T> implements ThreadDelegate {
     public ReturnThread() {
         mThread = new Thread(new Runnable() {
             @Override public void run() {
-                deliverEnd(operate());
+                deliverEnd(doInBackground());
             }
         });
     }
@@ -26,7 +26,7 @@ public abstract class ReturnThread<T> implements ThreadDelegate {
     private void deliverEnd(final T result) {
         ThreadUtil.getMainHandler().post(new Runnable() {
             @Override public void run() {
-                onOperateEnd(result);
+                onPostExecute(result);
             }
         });
     }
@@ -45,7 +45,7 @@ public abstract class ReturnThread<T> implements ThreadDelegate {
      * 线程需要执行的内容
      */
     @CheckResult
-    public abstract T operate();
+    public abstract T doInBackground();
 
     /**
      * 这个方法执行在UI线程
@@ -53,5 +53,5 @@ public abstract class ReturnThread<T> implements ThreadDelegate {
      * @param result
      */
     @AnyThread
-    public abstract void onOperateEnd(T result);
+    public abstract void onPostExecute(T result);
 }

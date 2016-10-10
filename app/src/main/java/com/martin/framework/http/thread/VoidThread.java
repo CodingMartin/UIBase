@@ -17,7 +17,7 @@ public abstract class VoidThread implements ThreadDelegate {
     public VoidThread() {
         mThread = new Thread(new Runnable() {
             @Override public void run() {
-                operate();
+                doInBackground();
                 deliverEnd();
             }
         });
@@ -26,15 +26,16 @@ public abstract class VoidThread implements ThreadDelegate {
     private void deliverEnd() {
         ThreadUtil.getMainHandler().post(new Runnable() {
             @Override public void run() {
-                onOperateEnd();
+                onPostExecute();
             }
         });
     }
 
+    /***
+     * 这个方法执行在UI线程
+     */
     @AnyThread
-    protected void onOperateEnd() {
-
-    }
+    protected void onPostExecute() {}
 
     /**
      * 执行线程返回对应的key
@@ -46,12 +47,12 @@ public abstract class VoidThread implements ThreadDelegate {
         return mKey;
     }
 
-    public boolean cancel() {
+    @Override public boolean cancel(long key) {
         return ThreadUtil.cancel(mKey);
     }
 
     /**
      * 线程需要执行的内容
      */
-    public abstract void operate();
+    public abstract void doInBackground();
 }

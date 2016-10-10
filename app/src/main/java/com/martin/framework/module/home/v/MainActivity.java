@@ -1,12 +1,14 @@
 package com.martin.framework.module.home.v;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Toast;
 
 import com.martin.framework.R;
 import com.martin.framework.base.BaseCompatActivity;
+import com.martin.framework.http.thread.VoidThread;
 import com.martin.framework.module.home.c.MainContract;
 import com.martin.framework.module.home.p.MainPresenter;
 import com.martin.framework.module.splash.v.ImageActivity;
@@ -30,7 +32,7 @@ public class MainActivity extends BaseCompatActivity implements MainContract.Vie
     protected void bindView() {
         getToolBarX().setTitle("麦圈").setDisplayHomeAsUpEnabled(false);
         new ReturnThread<String>() {
-            @Override public String operate() {
+            @Override public String doInBackground() {
                 try {
                     Thread.sleep(10000);
                 } catch (InterruptedException e) {
@@ -39,10 +41,27 @@ public class MainActivity extends BaseCompatActivity implements MainContract.Vie
                 return "麦圈";
             }
 
-            @Override public void onOperateEnd(String result) {
+            @Override public void onPostExecute(String result) {
                 Toast.makeText(MainActivity.this, result, Toast.LENGTH_SHORT).show();
             }
         }.start();
+
+       new VoidThread() {
+           @Override public void doInBackground() {
+
+           }
+       }.start();
+
+
+        new AsyncTask<Void, Void, String>() {
+            @Override protected String doInBackground(Void... params) {
+                return null;
+            }
+
+            @Override protected void onPostExecute(String s) {
+                super.onPostExecute(s);
+            }
+        }.execute();
     }
 
     /**
