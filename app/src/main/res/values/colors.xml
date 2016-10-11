@@ -4,4 +4,5 @@
     <color name="colorPrimaryDark">#3F51B5</color>
     <color name="colorAccent">#FF4081</color>
     <color name="translate">#00000000</color>
+    <color name="toast_bg">#EB000000</color>
 </resources>

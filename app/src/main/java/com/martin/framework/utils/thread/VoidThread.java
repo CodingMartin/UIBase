@@ -1,8 +1,7 @@
-package com.martin.framework.http.thread;
+package com.martin.framework.utils.thread;
 
 import android.support.annotation.AnyThread;
-
-import com.martin.framework.utils.ThreadUtil;
+import android.support.annotation.WorkerThread;
 
 /**
  * Desc:
@@ -11,16 +10,16 @@ import com.martin.framework.utils.ThreadUtil;
  */
 
 public abstract class VoidThread implements ThreadDelegate {
-    private Thread mThread;
+    private Runnable mThread;
     private long mKey;
 
     public VoidThread() {
-        mThread = new Thread(new Runnable() {
+        mThread = new Runnable() {
             @Override public void run() {
                 doInBackground();
                 deliverEnd();
             }
-        });
+        };
     }
 
     private void deliverEnd() {
@@ -35,24 +34,26 @@ public abstract class VoidThread implements ThreadDelegate {
      * 这个方法执行在UI线程
      */
     @AnyThread
-    protected void onPostExecute() {}
+    protected void onPostExecute() {
+    }
 
     /**
      * 执行线程返回对应的key
      *
      * @return
      */
-    public long start() {
+    public final long start() {
         mKey = ThreadUtil.execute(mThread);
         return mKey;
     }
 
-    @Override public boolean cancel(long key) {
+    @Override public final boolean cancel(long key) {
         return ThreadUtil.cancel(mKey);
     }
 
     /**
      * 线程需要执行的内容
      */
+    @WorkerThread
     public abstract void doInBackground();
 }

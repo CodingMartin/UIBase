@@ -1,4 +1,4 @@
-package com.martin.framework.utils;
+package com.martin.framework.utils.thread;
 
 import android.os.Handler;
 import android.os.Looper;
@@ -17,7 +17,7 @@ import java.util.concurrent.ScheduledExecutorService;
  */
 
 public class ThreadUtil {
-    public static final String TAG = ThreadUtil.class.getSimpleName();
+    static final String TAG = ThreadUtil.class.getSimpleName();
     private static ThreadUtil sThreadUtil;
     private final ScheduledExecutorService mExecutor;
     private final Handler mHandler;
@@ -43,7 +43,7 @@ public class ThreadUtil {
      * @param thread 执行线程
      * @return 返回线程对应的key用于查看线程执行情况和取消线程执行
      */
-    public static long execute(Thread thread) {
+    public static long execute(Runnable thread) {
         return getInstance().p_threadExecute(thread);
     }
 
@@ -100,7 +100,7 @@ public class ThreadUtil {
     }
 
 
-    private long p_threadExecute(Thread thread) {
+    private long p_threadExecute(Runnable thread) {
         Future future = mExecutor.submit(thread);
         long key = getAutoIncrementKey();
         mFutureArray.put(key, future);

@@ -1,20 +1,19 @@
 package com.martin.framework.module.home.v;
 
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Toast;
 
 import com.martin.framework.R;
 import com.martin.framework.base.BaseCompatActivity;
-import com.martin.framework.http.thread.VoidThread;
 import com.martin.framework.module.home.c.MainContract;
 import com.martin.framework.module.home.p.MainPresenter;
 import com.martin.framework.module.splash.v.ImageActivity;
 import com.martin.framework.module.splash.v.LoginActivity;
 import com.martin.framework.module.test.PlaceholderActivity;
-import com.martin.framework.http.thread.ReturnThread;
+import com.martin.framework.utils.thread.ReturnThread;
+import com.martin.framework.utils.thread.VoidThread;
 
 import butterknife.OnClick;
 
@@ -34,7 +33,7 @@ public class MainActivity extends BaseCompatActivity implements MainContract.Vie
         new ReturnThread<String>() {
             @Override public String doInBackground() {
                 try {
-                    Thread.sleep(10000);
+                    Thread.sleep(1000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -46,22 +45,19 @@ public class MainActivity extends BaseCompatActivity implements MainContract.Vie
             }
         }.start();
 
-       new VoidThread() {
-           @Override public void doInBackground() {
-
-           }
-       }.start();
-
-
-        new AsyncTask<Void, Void, String>() {
-            @Override protected String doInBackground(Void... params) {
-                return null;
+        new VoidThread() {
+            @Override public void doInBackground() {
+                try {
+                    Thread.sleep(2000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
 
-            @Override protected void onPostExecute(String s) {
-                super.onPostExecute(s);
+            @Override protected void onPostExecute() {
+                showTipToast("线程执行结束");
             }
-        }.execute();
+        }.start();
     }
 
     /**

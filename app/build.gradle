@@ -28,9 +28,9 @@ dependencies {
     compile 'com.jakewharton:butterknife:8.2.1'
     apt 'com.jakewharton:butterknife-compiler:8.2.1'
     /**状态栏透明*/
-    compile 'com.jaeger.statusbaruitl:library:1.2.4'
+    compile 'com.jaeger.statusbaruitl:library:1.2.5'
     /**可以高度自定义的刷新组件*/
-    compile 'com.dinuscxj:recyclerrefreshlayout:1.0.5'
+    compile 'com.dinuscxj:recyclerrefreshlayout:2.0.1'
     /**简化Adapter的书写,并且可以添加Header Footer EmptyView LoadMore Selection MultiType url!(www.recyclerview.org)[官网地址]...*/
     compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:v2.1.1'
 }

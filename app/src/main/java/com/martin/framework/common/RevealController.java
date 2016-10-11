@@ -7,6 +7,8 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.widget.Toast;
 
+import com.martin.framework.R;
+import com.martin.framework.utils.ToastUtil;
 import com.martin.framework.view.BaseRevealView;
 import com.martin.framework.view.EmptyView;
 
@@ -40,7 +42,8 @@ public class RevealController implements BaseRevealView {
 
     @Override
     public void showProgress() {
-        showProgress("正在加载...");
+//        showProgress("正在加载...");
+        ToastUtil.custom(mContext,"Success", R.mipmap.ic_launcher);
     }
 
     @Override
@@ -52,8 +55,10 @@ public class RevealController implements BaseRevealView {
 
     @Override
     public void showToast(String message) {
-        Toast.makeText(mContext, message, Toast.LENGTH_SHORT).show();
+//        Toast.makeText(mContext, message, Toast.LENGTH_SHORT).show();
+        ToastUtil.show(mContext,"这是测试Toast");
     }
+
 
     @Override
     public void showTipToast(String message) {

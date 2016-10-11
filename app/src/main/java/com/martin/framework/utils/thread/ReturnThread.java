@@ -1,9 +1,7 @@
-package com.martin.framework.http.thread;
+package com.martin.framework.utils.thread;
 
 import android.support.annotation.AnyThread;
 import android.support.annotation.CheckResult;
-
-import com.martin.framework.utils.ThreadUtil;
 
 /**
  * Desc:
@@ -12,15 +10,15 @@ import com.martin.framework.utils.ThreadUtil;
  */
 
 public abstract class ReturnThread<T> implements ThreadDelegate {
-    private final Thread mThread;
+    private final Runnable mThread;
     private long mKey;
 
     public ReturnThread() {
-        mThread = new Thread(new Runnable() {
+        mThread = new Runnable() {
             @Override public void run() {
                 deliverEnd(doInBackground());
             }
-        });
+        };
     }
 
     private void deliverEnd(final T result) {
@@ -31,12 +29,12 @@ public abstract class ReturnThread<T> implements ThreadDelegate {
         });
     }
 
-    @Override public long start() {
+    @Override public final long start() {
         mKey = ThreadUtil.execute(mThread);
         return mKey;
     }
 
-    @Override public boolean cancel(long key) {
+    @Override public final boolean cancel(long key) {
         ThreadUtil.cancel(mKey);
         return false;
     }
