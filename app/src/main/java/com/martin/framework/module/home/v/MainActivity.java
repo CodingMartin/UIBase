@@ -1,6 +1,7 @@
 package com.martin.framework.module.home.v;
 
 import android.content.Intent;
+import android.os.Build;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Toast;
@@ -10,8 +11,8 @@ import com.martin.framework.base.BaseCompatActivity;
 import com.martin.framework.module.home.c.MainContract;
 import com.martin.framework.module.home.p.MainPresenter;
 import com.martin.framework.module.splash.v.ImageActivity;
-import com.martin.framework.module.splash.v.LoginActivity;
 import com.martin.framework.module.test.PlaceholderActivity;
+import com.martin.framework.utils.StatusBarUtil;
 import com.martin.framework.utils.thread.ReturnThread;
 import com.martin.framework.utils.thread.VoidThread;
 
@@ -55,9 +56,15 @@ public class MainActivity extends BaseCompatActivity implements MainContract.Vie
             }
 
             @Override protected void onPostExecute() {
-                showTipToast("线程执行结束");
+                String str = String.format("%s \n %s \n %s \n %s", Build.BRAND,Build.BOARD,Build.MODEL,Build.PRODUCT);
+                showTipToast(str);
+
             }
         }.start();
+    }
+
+    @Override protected void setSystemStatus() {
+        StatusBarUtil.statusMode(this,StatusBarUtil.LIGHT);
     }
 
     /**
@@ -91,9 +98,16 @@ public class MainActivity extends BaseCompatActivity implements MainContract.Vie
     public void showMessageDialog(View view) {
         showMessageDialog("Hello World");
     }
-
+    int i = 0;
     public void login(View view) {
-        startActivity(new Intent(this, LoginActivity.class));
+//        startActivity(new Intent(this, LoginActivity.class));
+        int s = i % 2;
+        if (s == 0) {
+            StatusBarUtil.statusMode(this,StatusBarUtil.LIGHT);
+        }else {
+            StatusBarUtil.statusMode(this,StatusBarUtil.DARK);
+        }
+        i++;
     }
 
     public void showPop(View view) {
